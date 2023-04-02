@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize')
-
 const {DB,DB_USER,DB_PASS,DB_HOST,DB_TYPE}=process.env //VARIABLE DE ENVIROMENT
 
 const sequelize = new Sequelize(DB, DB_USER, DB_PASS, {
