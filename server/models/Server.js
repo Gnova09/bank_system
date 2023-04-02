@@ -1,7 +1,7 @@
 const express = require('express');
 //const cors = require('cors');
 const usuarios = require('../routes/usuarios');
-//const { dbconnection } = require('../database/config');
+const { dbconnection } = require('../database/config');
 
 class Server {
 
@@ -11,7 +11,7 @@ class Server {
         this.userPath = '/api/v1/usuarios'; 
 
         //CONECTAR A LA BD//
-       // this.conexionDB()s
+        this.conexionDB()
         //MIDDLEWARES//
         this.middlewares()
 
@@ -21,9 +21,9 @@ class Server {
     }
 
     //CONEXION A LA BD//
-    /* async conexionDB(){
+    async conexionDB(){
         await dbconnection();
-    } */
+    }
     //INICIANDO EL SERVIDOR//
     listen() {
 
