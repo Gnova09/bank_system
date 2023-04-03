@@ -8,6 +8,16 @@ const clienteExist = async cedula => {
    }
 }
 
+//VERIFICAR SI EL CLIENTE EXISTE//
+const isClientValid = async idCliente => {
+  
+    const existclient = await Cliente.findOne({where:{idCliente}})
+   if(!existclient){
+    throw new Error(`El cliente con id ${idCliente} no existe`)
+   }
+}
+
 module.exports = {
-    clienteExist
+    clienteExist,
+    isClientValid
 }

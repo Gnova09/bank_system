@@ -1,4 +1,4 @@
-const { Cliente } = require("../models/cliente")
+const { Cliente, CuentaBanco } = require("../models/cliente")
 
 const GetAllClient=()=>async (req,res)=>{
 
@@ -65,10 +65,69 @@ const DeleteClient = ()=>async (req,res)=>{
 
 }
 
+//CONTROLADORES DE  LAS CUENTAS DE BANCOS DEL CLIENTE//
+
+//RETORNAR LA CUENTA DEL BANCO DEL CLIENTE, JUNTO CON EL CLIENTE//
+const GetCuentaBanco  = ()=>async (req,res)=>{
+    const idCliente = req.params.idCliente
+    await CuentaBanco.findAll({
+        where:{
+            idCliente
+        }
+    })
+    .then((cuenta)=>{
+        res.json(cuenta)
+    })
+    .catch((err)=>{
+        console.log('Error al cargar:' + err);
+        res.status(400).json('Error al cargar ');
+    })
+}
+
+//CREAR CUENTA DE BANCO//
+const PostNewCuentaBanco  = ()=>async (req,res)=>{
+    const {idCliente,numero,banco,tipo} = req.body;
+
+    await CuentaBanco.create({
+        idCliente,
+        numero,
+        banco,
+        tipo
+    })
+    .then((cuenta)=>{
+        res.json(cuenta)
+    })
+    .catch((err)=>{
+        console.log('Error al cargar:' + err);
+        res.status(400).json('Error al cargar');
+    })
+}
+
+//ELIMINAR LA CUENTA//
+const GetDeleteCuentaBanco  = ()=>async (req,res)=>{
+    const {idCuenta,idCliente} = req.body
+
+    await CuentaBanco.destroy({
+        where:{
+            idCuenta,
+            idCliente
+        }
+    })
+    .then((response)=>{
+        res.json(response)
+    })
+    .catch((err)=>{
+        console.log('Error al cargar:' + err);
+        res.status(400).json('Error al cargar ');
+    })
+}
 
 module.exports = {
     GetAllClient,
     PostNewClient,
     DeleteClient,
-    GetClient
+    GetClient,
+    GetCuentaBanco,
+    PostNewCuentaBanco,
+    GetDeleteCuentaBanco
 }
