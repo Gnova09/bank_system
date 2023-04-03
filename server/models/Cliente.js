@@ -30,6 +30,14 @@ const Cliente = sequelize.define('cliente',{
         type: Sequelize.STRING,
         allowNull: false
     },
+    createdAt:{
+        type: Sequelize.DATE,
+        allowNull: false
+    },
+    updatedAt:{
+        type: Sequelize.DATE,
+        allowNull: false
+    }
 });
 
 
@@ -59,6 +67,8 @@ const CuentaBanco = sequelize.define('cuentaBanco',{
     },
 })
 
+//RELACIONES DE LA BBDD//
+CuentaBanco.belongsTo(Cliente, { foreignKey: 'idCliente' });
 
 module.exports={
     Cliente,
