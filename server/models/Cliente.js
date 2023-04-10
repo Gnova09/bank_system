@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const {sequelize} = require('../database/config');
+const { Prestamo } = require('./Prestamo');
 
 
 //CLIENTE MODELO//
@@ -54,8 +55,9 @@ const CuentaBanco = sequelize.define('cuentaBanco',{
         allowNull: false
     },
     numero:{
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
     },
     banco:{
         type: Sequelize.STRING,
@@ -64,11 +66,13 @@ const CuentaBanco = sequelize.define('cuentaBanco',{
     tipo:{
         type: Sequelize.STRING,
         allowNull: false
-    },
+    }
 })
 
 //RELACIONES DE LA BBDD//
 CuentaBanco.belongsTo(Cliente, { foreignKey: 'idCliente' });
+Cliente.hasMany(CuentaBanco, {foreignKey: 'idCliente'})
+Cliente.hasMany(Prestamo, {foreignKey: 'idCliente'})
 
 module.exports={
     Cliente,

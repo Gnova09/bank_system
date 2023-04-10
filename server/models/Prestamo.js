@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const { sequelize } = require('../database/config');
+const { Cliente } = require("./cliente")
 
 //PRESTAMO MODELO//
 const Prestamo = sequelize.define('prestamo', {
@@ -10,11 +11,11 @@ const Prestamo = sequelize.define('prestamo', {
         allowNull: false
     },
     idCliente: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false
     },
     monto: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false
     },
     fechaBeg: {
@@ -26,7 +27,7 @@ const Prestamo = sequelize.define('prestamo', {
         allowNull: false
     },
     insteres: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false
     },
 });
@@ -38,20 +39,20 @@ const Garantia = sequelize.define('garantia', {
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
-    }, 
-    idPrestamo:{
+    },
+    idPrestamo: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    tipo: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    tipo:{
+    valor: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    valor:{
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    ubicacion:{
+    ubicacion: {
         type: Sequelize.STRING,
         allowNull: false
     },
@@ -64,28 +65,32 @@ const CuotaPrestamo = sequelize.define('cuotaprestamo', {
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
-    }, 
-    idPrestamo:{
+    },
+    idPrestamo: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    tipo: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    tipo:{
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    fechaPlanificado:{
+    fechaPlanificado: {
         type: Sequelize.DATE,
         allowNull: false
     },
-    fechaRealizado:{
+    fechaRealizado: {
         type: Sequelize.DATE,
         allowNull: false
     },
-    codigoComprobante:{
+    codigoComprobante: {
         type: Sequelize.STRING,
         allowNull: false
     },
 });
+
+//RELACIONES DE LAS TABLAS//
+Garantia.belongsTo(Prestamo, { foreignKey: 'idPrestamo' });
+CuotaPrestamo.belongsTo(Prestamo, { foreignKey: 'idPrestamo' });
 
 
 module.exports = {
