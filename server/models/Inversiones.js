@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const { sequelize } = require('../database/config');
-const { Cliente } = require("./cliente")
 
 
 //INVERSION MODELO//
@@ -12,11 +11,11 @@ const Inversion = sequelize.define('inversion', {
         allowNull: false
     },
     idCliente: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false
     },
     monto: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false
     },
     fechaBeg: {
@@ -28,7 +27,7 @@ const Inversion = sequelize.define('inversion', {
         allowNull: false
     },
     insteres: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false
     },
 });
@@ -42,7 +41,7 @@ const CuotaInversion = sequelize.define('cuotainversion', {
         allowNull: false
     },
     idInversion: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false
     },
     monto: {
@@ -68,7 +67,6 @@ const CuotaInversion = sequelize.define('cuotainversion', {
 });
 
 //RELACIONES DE LAS TABLAS//
-Inversion.belongsTo(Cliente, { foreignKey: 'idCliente' });
 CuotaInversion.belongsTo(Inversion, { foreignKey: 'idInversion' });
 
 module.exports = {

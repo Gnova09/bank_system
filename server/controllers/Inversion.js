@@ -1,16 +1,16 @@
-const { Prestamo, Garantia } = require("../models/Prestamo")
+const { Inversion } = require("../models/Inversiones")
 const { Cliente} = require("../models/cliente")
 
 
-//CREAR UN PRESTAMO//
-const PostNewPrestamo = ()=>(req,res)=>{
+//CREAR UN Inversion//
+const PostNewInversion = ()=>(req,res)=>{
     const {monto,insteres, fechaEnd,fechaBeg} = req.body
     const idCliente = req.params.idCliente;
 
     //CREAMOS LA FACTURA//
-    Prestamo.create({monto,insteres,fechaBeg,fechaEnd, idCliente})
-    .then((Prestamo)=>{
-        res.json(Prestamo)
+    Inversion.create({monto,insteres,fechaBeg,fechaEnd, idCliente})
+    .then((inversion)=>{
+        res.json(inversion)
     })
     .catch((err)=>{
         console.log('Error al cargar:' + err);
@@ -19,7 +19,7 @@ const PostNewPrestamo = ()=>(req,res)=>{
 }
 
 //PRESTAMO POR CLIENTE//
-const GetPrestamoByClient = ()=>(req,res)=>{
+const GetInversionByClient = ()=>(req,res)=>{
     
     const idCliente = req.params.idCliente;
 
@@ -27,7 +27,7 @@ const GetPrestamoByClient = ()=>(req,res)=>{
     Cliente.findByPk(idCliente, {
         include:[
             {
-                model: Prestamo
+                model: Inversion
             }
         ]
     })
@@ -43,6 +43,6 @@ const GetPrestamoByClient = ()=>(req,res)=>{
 
 
 module.exports={
-PostNewPrestamo,
-GetPrestamoByClient
+PostNewInversion,
+GetInversionByClient
 }

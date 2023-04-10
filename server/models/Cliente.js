@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const {sequelize} = require('../database/config');
 const { Prestamo } = require('./Prestamo');
+const { Inversion } = require('./Inversiones');
 
 
 //CLIENTE MODELO//
@@ -16,6 +17,10 @@ const Cliente = sequelize.define('cliente',{
         allowNull: false
     },
     nombre:{
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    password:{
         type: Sequelize.STRING,
         allowNull: false
     },
@@ -40,7 +45,6 @@ const Cliente = sequelize.define('cliente',{
         allowNull: false
     }
 });
-
 
 //CUENTA DE BANCO MODELO//
 const CuentaBanco = sequelize.define('cuentaBanco',{
@@ -73,6 +77,7 @@ const CuentaBanco = sequelize.define('cuentaBanco',{
 CuentaBanco.belongsTo(Cliente, { foreignKey: 'idCliente' });
 Cliente.hasMany(CuentaBanco, {foreignKey: 'idCliente'})
 Cliente.hasMany(Prestamo, {foreignKey: 'idCliente'})
+Cliente.hasMany(Inversion, {foreignKey: 'idCliente'})
 
 module.exports={
     Cliente,
