@@ -29,7 +29,10 @@ const GetInversionByClient = ()=>(req,res)=>{
             {
                 model: Inversion
             }
-        ]
+        ],
+        attributes: {
+            exclude: ['password']
+          },
     })
     .then((client)=>{
         res.json(client)

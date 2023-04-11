@@ -1,10 +1,19 @@
 const { Cliente } = require("../models/cliente")
 
-const clienteExist = async cedula => {
+//VERIFICAR SI LA CEDULA EXISTE//
+const cedulaExist = async cedula => {
   
     const existclient = await Cliente.findOne({where:{cedula}})
    if(existclient){
     throw new Error(`El cliente con ${cedula} existe`)
+   }
+}
+//VERIFICAR SI EL CLIENTE EXISTE LOGIN//
+const clientExist = async cedula => {
+  
+    const existclient = await Cliente.findOne({where:{cedula}})
+   if(!existclient){
+    throw new Error(`El cliente con cedula ${cedula} no existe`)
    }
 }
 
@@ -18,6 +27,7 @@ const isClientValid = async idCliente => {
 }
 
 module.exports = {
-    clienteExist,
-    isClientValid
+    cedulaExist,
+    isClientValid,
+    clientExist
 }

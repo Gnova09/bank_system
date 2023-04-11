@@ -8,11 +8,18 @@ const {
     GetClient,
     GetCuentaBanco,
     PostNewCuentaBanco,
-    GetDeleteCuentaBanco 
+    GetDeleteCuentaBanco,
+    PostLoginClient
 } = require('../controllers/Cliente');
-const { clienteExist, isClientValid } = require('../middlewares/validation');
+const { cedulaExist, isClientValid,clientExist } = require('../middlewares/validation');
 
 const router = Router();
+
+//RETORNAR TODOS LOS CLIENTES//
+router.post('/login',[
+    check('cedula','Error en el cliente').custom(clientExist),
+    validarCampos
+],PostLoginClient())
 
 //RETORNAR TODOS LOS CLIENTES//
 router.get('/', GetAllClient())
@@ -20,14 +27,16 @@ router.get('/', GetAllClient())
 //RETORNAR EL CLIENTE//
 router.get('/:idCliente', [
     check('idCliente', 'Error en la cedula').notEmpty(),
+    check('idCliente','Error en el cliente').custom(isClientValid),
     validarCampos
 ], GetClient())
 
 //CREAR UN NUEVO CLIENTE//
 router.post('/new', [
     check('cedula', 'Error en la cedula').notEmpty(),
-    check('cedula', 'Ya Existe').custom(clienteExist),
+    check('cedula', 'Ya Existe').custom(cedulaExist),
     check('nombre', 'Indicar el nombre').notEmpty(),
+    check('password', 'Indicar el password').notEmpty(),
     check('apellido', 'Indicar el apellido').notEmpty(),
     check('direccion', 'Indicar el direccion').notEmpty(),
     check('telefono', 'Indicar el telefono').notEmpty(),
@@ -37,6 +46,7 @@ router.post('/new', [
 //ELIMINAR CLIENTE//
 router.delete('/delete/:idCliente', [
     check('idCliente', 'Error en la cedula').notEmpty(),
+    check('idCliente','Error en el cliente').custom(isClientValid),
     validarCampos
 ], DeleteClient())
 

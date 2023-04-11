@@ -29,7 +29,10 @@ const GetPrestamoByClient = ()=>(req,res)=>{
             {
                 model: Prestamo
             }
-        ]
+        ],
+        attributes: {
+            exclude: ['password']
+          },
     })
     .then((client)=>{
         res.json(client)

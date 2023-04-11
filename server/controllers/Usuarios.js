@@ -19,24 +19,8 @@ const loginPOST = () => async (req, res) => {
 
 }
 
-//REGISTRAR USUARIO//
-const registerPOST = () => async (req, res) => {
-    const { user, pass } = req.body;
-    /*TODO: 
-        -Validar que el usuario no exista en la BD
-        -Registrar el usuario en la BD
-    */
-
-    //GENERATE HASH//
-    const salt = bcrypt.genSaltSync();
-    const password = await bcrypt.hash(pass, salt);
-
-    res.json({ user, creationDate: new Date() });
-
-}
-
 
 module.exports = {
-    loginPOST,
-    registerPOST
+    loginPOST
+    
 }

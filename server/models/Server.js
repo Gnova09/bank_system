@@ -1,6 +1,5 @@
 const express = require('express');
 //const cors = require('cors');
-const usuarios = require('../routes/usuarios');
 const clienteRouter = require('../routes/cliente');
 const prestamoRouter = require('../routes/prestamos');
 const inversionRouter = require('../routes/inversion');
@@ -11,7 +10,6 @@ class Server {
     constructor() {
         this.port = process.env.PORT;
         this.app = express();
-        this.userPath = '/api/v1/usuarios'; 
         this.clientPath = '/api/v1/cliente'; 
         this.prestamoPath = '/api/v1/prestamo'; 
         this.inversionPath = '/api/v1/inversion'; 
@@ -50,7 +48,6 @@ class Server {
 
     //ROUTAS DEL SERVIDO//
     routes() {
-       this.app.use(this.userPath, usuarios)
        this.app.use(this.clientPath, clienteRouter)
        this.app.use(this.prestamoPath, prestamoRouter)
        this.app.use(this.inversionPath, inversionRouter)
