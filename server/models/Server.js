@@ -1,5 +1,5 @@
 const express = require('express');
-//const cors = require('cors');
+const cors = require('cors');
 const clienteRouter = require('../routes/cliente');
 const prestamoRouter = require('../routes/prestamos');
 const inversionRouter = require('../routes/inversion');
@@ -41,7 +41,7 @@ class Server {
         //DIRECTORIO PUBLICO//
         //this.app.use(express.static('public'))
         //ACTIVAR EL USO DE CORS//
-        //this.app.use(cors());
+        this.app.use(cors());
         //LECTURA DE JSON DE ENTRADA//
         this.app.use(express.json());
     }
