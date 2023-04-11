@@ -40,8 +40,10 @@ class Server {
     middlewares() {
         //DIRECTORIO PUBLICO//
         //this.app.use(express.static('public'))
+
         //ACTIVAR EL USO DE CORS//
         this.app.use(cors());
+        
         //LECTURA DE JSON DE ENTRADA//
         this.app.use(express.json());
     }
