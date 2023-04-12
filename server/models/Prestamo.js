@@ -30,6 +30,9 @@ const Prestamo = sequelize.define('prestamo', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
+},
+{
+    paranoid: true, // Activamos eliminacion logica
 });
 
 //GARANTIA MODELO//
@@ -56,6 +59,9 @@ const Garantia = sequelize.define('garantia', {
         type: Sequelize.STRING,
         allowNull: false
     },
+},
+{
+    paranoid: true, // Activamos eliminacion logica
 });
 
 //CUOTA DEL PRESAMO MODELO//
@@ -86,6 +92,9 @@ const CuotaPrestamo = sequelize.define('cuotaprestamo', {
         type: Sequelize.STRING,
         allowNull: false
     },
+},
+{
+    paranoid: true, // Activamos eliminacion logica
 });
 
 //RELACIONES DE LAS TABLAS//

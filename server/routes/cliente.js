@@ -45,10 +45,13 @@ router.post('/new', [
 
 //ELIMINAR CLIENTE//
 router.delete('/delete/:idCliente', [
-    check('idCliente', 'Error en la cedula').notEmpty(),
+    check('idCliente', 'Error en la ID').notEmpty(),
     check('idCliente','Error en el cliente').custom(isClientValid),
     validarCampos
 ], DeleteClient())
+
+
+//-------------------RUTAS DE CUENTA DE BANCO---------------------//
 
 //OBTENER LA CUENTA DEL BANCO DEL CLIENTE//
 router.get('/cuentabanco/:idCliente', [
@@ -73,6 +76,7 @@ router.delete('/cuentabanco/delete/', [
     //VERIFICAR QUE LA CUENTA EXISTE//
     check('idCuenta', 'Error en la idCuenta').notEmpty(),
     check('idCliente', 'Error en la idCliente').notEmpty(),
+    check('idCliente', 'No es un cliente existente').custom(isClientValid),
     validarCampos
 ], GetDeleteCuentaBanco())
 

@@ -44,6 +44,9 @@ const Cliente = sequelize.define('cliente',{
         type: Sequelize.DATE,
         allowNull: false
     }
+},
+{
+    paranoid: true, // Activamos eliminacion logica
 });
 
 //CUENTA DE BANCO MODELO//
@@ -71,6 +74,9 @@ const CuentaBanco = sequelize.define('cuentaBanco',{
         type: Sequelize.STRING,
         allowNull: false
     }
+},
+{
+    paranoid: true, // Activamos eliminacion logica
 })
 
 //RELACIONES DE LA BBDD//

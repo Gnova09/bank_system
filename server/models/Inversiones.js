@@ -30,6 +30,9 @@ const Inversion = sequelize.define('inversion', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
+},
+{
+    paranoid: true, // Activamos eliminacion logica
 });
 
 //CUOTAS DE INVERSION MODELO//
@@ -64,6 +67,9 @@ const CuotaInversion = sequelize.define('cuotainversion', {
         type: Sequelize.STRING,
         allowNull: false
     },
+},
+{
+    paranoid: true, // Activamos eliminacion logica
 });
 
 //RELACIONES DE LAS TABLAS//
