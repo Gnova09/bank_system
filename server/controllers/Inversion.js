@@ -1,5 +1,5 @@
 const { Inversion } = require("../models/Inversiones")
-const { Cliente} = require("../models/cliente")
+const { Cliente} = require("../models/Cliente")
 
 
 //CREAR UN Inversion//

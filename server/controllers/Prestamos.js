@@ -1,5 +1,5 @@
 const { Prestamo, Garantia } = require("../models/Prestamo")
-const { Cliente} = require("../models/cliente")
+const { Cliente} = require("../models/Cliente")
 
 
 //CREAR UN PRESTAMO//
