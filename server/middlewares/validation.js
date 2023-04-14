@@ -1,6 +1,6 @@
 const passport = require('passport');
 const BasicStrategy = require('passport-http').BasicStrategy;
-const { Cliente } = require("../models/cliente")
+const { Cliente } = require("../models/Cliente")
 
 //VERIFICAR SI LA CEDULA EXISTE//
 const cedulaExist = async cedula => {
