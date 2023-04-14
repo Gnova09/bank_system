@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const { Cliente, CuentaBanco } = require("../models/cliente")
+const { Cliente, CuentaBanco } = require("../models/Cliente")
 
 //----------//CONTROLADORES DE LOS CLIENTES//--------------//
 

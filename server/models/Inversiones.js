@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const { sequelize } = require('../database/config');
+const {Cliente} = require('./Cliente');
 
 
 //INVERSION MODELO//
@@ -74,6 +75,7 @@ const CuotaInversion = sequelize.define('cuotainversion', {
 
 //RELACIONES DE LAS TABLAS//
 CuotaInversion.belongsTo(Inversion, { foreignKey: 'idInversion' });
+//Inversion.belongsTo(Cliente, {foreignKey: 'idCliente'})
 
 module.exports = {
     Inversion,
