@@ -26,7 +26,8 @@ const GetAllClient = () => async (req, res) => {
     await Cliente.findAll({
         include: [
             {
-                model: CuentaBanco
+                model: CuentaBanco,
+                              
             }
         ],
         attributes: {

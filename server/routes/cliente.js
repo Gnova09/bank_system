@@ -22,7 +22,7 @@ router.post('/login',[
 ],PostLoginClient())
 
 //RETORNAR TODOS LOS CLIENTES//
-router.get('/', GetAllClient())
+router.get('/',[validarCampos], GetAllClient())
 
 //RETORNAR EL CLIENTE//
 router.get('/:idCliente', [

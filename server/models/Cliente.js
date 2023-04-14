@@ -50,7 +50,7 @@ const Cliente = sequelize.define('cliente',{
 });
 
 //CUENTA DE BANCO MODELO//
-const CuentaBanco = sequelize.define('cuentaBanco',{
+const CuentaBanco = sequelize.define('cuentabanco',{
     idCliente:{
         type: Sequelize.INTEGER,
         allowNull: false
@@ -80,10 +80,10 @@ const CuentaBanco = sequelize.define('cuentaBanco',{
 })
 
 //RELACIONES DE LA BBDD//
-CuentaBanco.belongsTo(Cliente, { foreignKey: 'idCliente' });
+ CuentaBanco.belongsTo(Cliente, { foreignKey: 'idCliente' });
 Cliente.hasMany(CuentaBanco, {foreignKey: 'idCliente'})
 Cliente.hasMany(Prestamo, {foreignKey: 'idCliente'})
-Cliente.hasMany(Inversion, {foreignKey: 'idCliente'})
+Cliente.hasMany(Inversion, {foreignKey: 'idCliente'}) 
 
 module.exports={
     Cliente,

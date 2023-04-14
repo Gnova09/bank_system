@@ -3,7 +3,10 @@ const {DB,DB_USER,DB_PASS,DB_HOST,DB_TYPE}=process.env //VARIABLE DE ENVIROMENT
 
 const sequelize = new Sequelize(DB, DB_USER, DB_PASS, {
     host: DB_HOST,
-    dialect: DB_TYPE
+    dialect: DB_TYPE,
+    dialectOptions: {
+        ssl: false
+      }
 })
 
 const dbconnection = async () => {
