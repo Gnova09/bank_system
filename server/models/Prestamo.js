@@ -98,7 +98,7 @@ const CuotaPrestamo = sequelize.define('cuotaprestamo', {
 });
 
 //RELACIONES DE LAS TABLAS//
-Garantia.belongsTo(Prestamo, { foreignKey: 'idPrestamo' });
+Prestamo.hasOne(Garantia, { foreignKey: 'idPrestamo' });
 CuotaPrestamo.belongsTo(Prestamo, { foreignKey: 'idPrestamo' });
 //Prestamo.belongsTo(Cliente, {foreignKey: 'idCliente'})
 

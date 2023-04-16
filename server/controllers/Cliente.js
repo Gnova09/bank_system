@@ -1,5 +1,7 @@
 const bcrypt = require('bcryptjs');
-const { Cliente, CuentaBanco } = require("../models/Cliente")
+const { Cliente, CuentaBanco } = require("../models/Cliente");
+const { Prestamo } = require('../models/Prestamo');
+const { Inversion } = require('../models/Inversiones');
 
 //----------//CONTROLADORES DE LOS CLIENTES//--------------//
 
@@ -26,9 +28,9 @@ const GetAllClient = () => async (req, res) => {
     await Cliente.findAll({
         include: [
             {
-                model: CuentaBanco,
-                              
-            }
+                model: CuentaBanco,                 
+            },
+            
         ],
         attributes: {
             exclude: ['password']
@@ -44,7 +46,7 @@ const GetAllClient = () => async (req, res) => {
 
 }
 
-//RETORNAR UN CLIENTE
+//RETORNAR TODO DE UN CLIENTE
 const GetClient = () => async (req, res) => {
     const idCliente = req.params.idCliente
 
@@ -53,6 +55,12 @@ const GetClient = () => async (req, res) => {
         include: [
             {
                 model: CuentaBanco
+            },
+            {
+                model: Prestamo
+            },
+            {
+                model: Inversion
             }
         ],
         attributes: {
