@@ -63,10 +63,7 @@ const GetPrestamoByClient = () => (req, res) => {
             {
                 model: CuotaPrestamo
             }
-        ],
-        attributes: {
-            exclude: ['password']
-        },
+        ]
     })
         .then((client) => {
             res.json(client)

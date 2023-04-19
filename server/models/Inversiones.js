@@ -49,24 +49,26 @@ const CuotaInversion = sequelize.define('cuotainversion', {
         allowNull: false
     },
     monto: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false
     },
     tipo: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue: "PENDIENTE"
     },
     fechaRealizada: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
     },
-    fechaPlanificada: {
+    fechaPlanificado: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false      
     },
     codigoComprobante: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue: "NO COMPLETADO"
     },
 },
 {
@@ -74,7 +76,7 @@ const CuotaInversion = sequelize.define('cuotainversion', {
 });
 
 //RELACIONES DE LAS TABLAS//
-CuotaInversion.belongsTo(Inversion, { foreignKey: 'idInversion' });
+Inversion.hasMany(CuotaInversion, { foreignKey: 'idInversion' });
 //Inversion.belongsTo(Cliente, {foreignKey: 'idCliente'})
 
 module.exports = {

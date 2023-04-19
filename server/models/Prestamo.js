@@ -91,13 +91,11 @@ const CuotaPrestamo = sequelize.define('cuotaprestamo', {
     },
     fechaRealizado: {
         type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: "1/1/1970"
+        allowNull: true
     },
     codigoComprobante: {
         type: Sequelize.STRING,
-        allowNull: false,
-        defaultValue: "NO COMPLETADO"
+        allowNull: true
     },
 },
 {
