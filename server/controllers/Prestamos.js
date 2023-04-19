@@ -36,7 +36,8 @@ const PostNewPrestamo = () => async (req, res) => {
                 idPrestamo: prestamo.idPrestamo,
                 fechaBeg: fechaBeg,
                 fechaEnd: fechaEnd,
-                prestamoCantidad: monto
+                prestamoCantidad: monto,
+                insteres
             })
         }).catch((err) => {
             //ERROR AL CREAR EL PRESTAMO//
