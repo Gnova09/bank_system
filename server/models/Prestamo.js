@@ -78,7 +78,12 @@ const CuotaPrestamo = sequelize.define('cuotaprestamo', {
     },
     tipo: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue: "PENDIENTE"
+    },
+    monto: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
     },
     fechaPlanificado: {
         type: Sequelize.DATE,
@@ -86,11 +91,13 @@ const CuotaPrestamo = sequelize.define('cuotaprestamo', {
     },
     fechaRealizado: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: "0/0/0"
     },
     codigoComprobante: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue: "NO COMPLETADO"
     },
 },
 {
@@ -99,7 +106,8 @@ const CuotaPrestamo = sequelize.define('cuotaprestamo', {
 
 //RELACIONES DE LAS TABLAS//
 Prestamo.hasOne(Garantia, { foreignKey: 'idPrestamo' });
-CuotaPrestamo.belongsTo(Prestamo, { foreignKey: 'idPrestamo' });
+Prestamo.hasMany(CuotaPrestamo, { foreignKey: 'idPrestamo' });
+//CuotaPrestamo.belongsTo(Prestamo, { foreignKey: 'idPrestamo' });
 //Prestamo.belongsTo(Cliente, {foreignKey: 'idCliente'})
 
 
