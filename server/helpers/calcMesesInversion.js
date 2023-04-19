@@ -13,27 +13,29 @@ const calcMesesInversion = async ({ fechaBeg, fechaEnd, inversionCantidad, idInv
         30 días por mes (valor aproximado) 
     */
     // console.log(diffMeses)
-    const interesAnual = insteres/100; //Interes anual
+    const interesAnual = insteres / 100; //Interes anual
     const cantMeses = Math.round(diffMeses);  //Meses del prestamo
-    const cantyears = Math.round(cantMeses/12) //Años del prestamo
-    const totalPrestamosInteres = inversionCantidad*(1+(cantyears*interesAnual)); //Total a pagar del prestamo
+    const cantyears = Math.round(cantMeses / 12) //Años del prestamo
+    const totalPrestamosInteres = inversionCantidad * (1 + (cantyears * interesAnual)); //Total a pagar del prestamo
     const cantPorMes = totalPrestamosInteres / cantMeses; // Cantidad a pagar mensual
 
     let cuotas = []
 
-    for (let fechaActual = fecha1Ms; fechaActual < fecha2Ms; fechaActual.setMonth(fechaActual.getMonth() + 1)) {
-        console.log(fechaActual.getMonth()+1)
+    for (let fechaActual = fecha1Ms; fechaActual <= fecha2Ms; fechaActual.setMonth(fechaActual.getMonth() + 1)) {
+        const fechaActualizada = new Date(fechaActual);
+        console.log(fechaActual)
         // Creamos un objeto con los datos de la cuota del préstamo para la fecha actual
-        const cuota = {
+        var cuota = {
             idInversion,
             tipo: "",
-            fechaPlanificado: fechaActual,
+            fechaPlanificado: fechaActualizada,
             monto: cantPorMes
         };
 
         // Agregamos la cuota al arreglo de cuotas
         cuotas.push(cuota);
     }
+    console.log(cuotas)
     return cuotas;
 
 }

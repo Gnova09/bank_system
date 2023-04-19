@@ -22,11 +22,12 @@ const calcMesesEntreFechas = async ({ fechaBeg, fechaEnd, prestamoCantidad, idPr
     let cuotas = []
 
     for (let fechaActual = fecha1Ms; fechaActual <= fecha2Ms; fechaActual.setMonth(fechaActual.getMonth() + 1)) {
+        const fechaActualizada = new Date(fechaActual);
         // Creamos un objeto con los datos de la cuota del préstamo para la fecha actual
         const cuota = {
             idPrestamo,
             tipo: "",
-            fechaPlanificado: fechaActual,
+            fechaPlanificado: fechaActualizada,
             monto: cantPorMes
         };
 
