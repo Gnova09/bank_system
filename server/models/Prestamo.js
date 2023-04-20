@@ -18,6 +18,14 @@ const Prestamo = sequelize.define('prestamo', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
+    montoMasIntereses: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    montoFaltante: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
     fechaBeg: {
         type: Sequelize.DATE,
         allowNull: false
@@ -50,6 +58,10 @@ const Garantia = sequelize.define('garantia', {
     tipo: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    nombre: {
+        type: Sequelize.STRING,
+        allowNull: true
     },
     valor: {
         type: Sequelize.STRING,
@@ -95,7 +107,7 @@ const CuotaPrestamo = sequelize.define('cuotaprestamo', {
     },
     codigoComprobante: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: true,
     },
 },
 {

@@ -1,10 +1,10 @@
 const { CuotaPrestamo } = require("../models/Prestamo")
-const { calcMesesEntreFechas } = require("./calcMesesEntreFechas")
+const { calcTotalPrestamoInteres } = require("./calcMesesPrestamo")
 
 //Creamos la cuotas del prestamo//
-const createCuotasPrestamo = async({idPrestamo, fechaBeg, fechaEnd, prestamoCantidad,insteres}) => {
+const createCuotasPrestamo = async({idPrestamo, fechaBeg, fechaEnd, monto,insteres}) => {
 
-    const cantDeCuotas = await calcMesesEntreFechas({fechaBeg, fechaEnd, idPrestamo, prestamoCantidad, insteres})
+    const cantDeCuotas = await calcTotalPrestamoInteres({fechaBeg, fechaEnd, idPrestamo, monto, insteres})
     //console.log(cantDeCuotas);
 
         await CuotaPrestamo.bulkCreate(cantDeCuotas)

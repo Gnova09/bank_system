@@ -3,6 +3,7 @@ const cors = require('cors');
 const clienteRouter = require('../routes/cliente');
 const prestamoRouter = require('../routes/prestamos');
 const inversionRouter = require('../routes/inversion');
+const pagosRouter = require('../routes/pagos');
 const { dbconnection } = require('../database/config');
 
 class Server {
@@ -13,6 +14,7 @@ class Server {
         this.clientPath = '/api/v1/cliente'; 
         this.prestamoPath = '/api/v1/prestamo'; 
         this.inversionPath = '/api/v1/inversion'; 
+        this.pagosPath = '/api/v1/pagos'; 
 
         //CONECTAR A LA BD//
         this.conexionDB()
@@ -53,6 +55,7 @@ class Server {
        this.app.use(this.clientPath, clienteRouter)
        this.app.use(this.prestamoPath, prestamoRouter)
        this.app.use(this.inversionPath, inversionRouter)
+       this.app.use(this.pagosPath, pagosRouter)
     }
 
 }

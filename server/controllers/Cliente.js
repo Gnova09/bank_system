@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const { Cliente, CuentaBanco } = require("../models/Cliente");
-const { Prestamo } = require('../models/Prestamo');
+const { Prestamo, CuotaPrestamo } = require('../models/Prestamo');
 const { Inversion } = require('../models/Inversiones');
 
 //----------//CONTROLADORES DE LOS CLIENTES//--------------//
@@ -57,7 +57,10 @@ const GetClient = () => async (req, res) => {
                 model: CuentaBanco
             },
             {
-                model: Prestamo
+                model: Prestamo,
+                include:{ 
+                    model: CuotaPrestamo
+                }
             },
             {
                 model: Inversion

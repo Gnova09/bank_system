@@ -23,7 +23,7 @@ const calcMesesInversion = async ({ fechaBeg, fechaEnd, inversionCantidad, idInv
 
     for (let fechaActual = fecha1Ms; fechaActual <= fecha2Ms; fechaActual.setMonth(fechaActual.getMonth() + 1)) {
         const fechaActualizada = new Date(fechaActual);
-        console.log(fechaActual)
+        //console.log(fechaActual)
         // Creamos un objeto con los datos de la cuota del préstamo para la fecha actual
         var cuota = {
             idInversion,
@@ -35,7 +35,7 @@ const calcMesesInversion = async ({ fechaBeg, fechaEnd, inversionCantidad, idInv
         // Agregamos la cuota al arreglo de cuotas
         cuotas.push(cuota);
     }
-    console.log(cuotas)
+    //console.log(cuotas)
     return cuotas;
 
 }

@@ -1,6 +1,7 @@
 const passport = require('passport');
 const BasicStrategy = require('passport-http').BasicStrategy;
-const { Cliente } = require("../models/Cliente")
+const { Cliente } = require("../models/Cliente");
+const { Prestamo } = require('../models/Prestamo');
 
 //VERIFICAR SI LA CEDULA EXISTE//
 const cedulaExist = async cedula => {
@@ -28,8 +29,18 @@ const isClientValid = async idCliente => {
     }
 }
 
+//VERIFICAR SI EL PRESTAMO EXISTE//
+const isPrestamoValid = async idPrestamo => {
+
+    const existclient = await Prestamo.findOne({ where: { idPrestamo } })
+    if (!existclient) {
+        throw new Error(`El cliente con id ${idPrestamo} no existe`)
+    }
+}
+
 module.exports = {
     cedulaExist,
     isClientValid,
-    clientExist
+    clientExist,
+    isPrestamoValid
 }

@@ -1,5 +1,5 @@
 
-const calcMesesEntreFechas = async ({ fechaBeg, fechaEnd, prestamoCantidad, idPrestamo, insteres }) => {
+const calcTotalPrestamoInteres = async ({ fechaBeg, fechaEnd, monto, idPrestamo, insteres }) => {
 
     const fecha1Ms = new Date(fechaBeg); // Obtiene la cantidad de milisegundos desde 1970 para la primera fecha
     const fecha2Ms = new Date(fechaEnd); // Obtiene la cantidad de milisegundos desde 1970 para la segunda fecha
@@ -16,7 +16,7 @@ const calcMesesEntreFechas = async ({ fechaBeg, fechaEnd, prestamoCantidad, idPr
     const interesAnual = insteres/100; //Interes anual
     const cantMeses = Math.round(diffMeses);  //Meses del prestamo
     const cantyears = Math.round(cantMeses/12) //Años del prestamo
-    const totalPrestamosInteres = prestamoCantidad*(1+(cantyears*interesAnual)); //Total a pagar del prestamo
+    const totalPrestamosInteres = monto*(1+(cantyears*interesAnual)); //Total a pagar del prestamo
     const cantPorMes = totalPrestamosInteres / cantMeses; // Cantidad a pagar mensual
 
     let cuotas = []
@@ -39,5 +39,5 @@ const calcMesesEntreFechas = async ({ fechaBeg, fechaEnd, prestamoCantidad, idPr
 }
 
 module.exports = {
-    calcMesesEntreFechas
+    calcTotalPrestamoInteres
 }
