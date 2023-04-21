@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const { Cliente, CuentaBanco } = require("../models/Cliente");
 const { Prestamo, CuotaPrestamo } = require('../models/Prestamo');
 const { Inversion } = require('../models/Inversiones');
+const { sequelize } = require('../database/config');
 
 //----------//CONTROLADORES DE LOS CLIENTES//--------------//
 
@@ -191,6 +192,23 @@ const GetDeleteCuentaBanco = () => async (req, res) => {
         })
 }
 
+//DEPOSITAR A LA CUENTA//
+const PostDepositoCuentaBanco = () => async (req, res) => {
+    const { idCuenta, monto } = req.body
+
+    await CuentaBanco.update(
+    {
+        numero: sequelize.literal(`numero + ${monto}`)
+    }, {where: {idCuenta}})
+        .then((response) => {
+            res.json('Deposito realizado')
+        })
+        .catch((err) => {
+            console.log('Error al cargar:' + err);
+            res.status(400).json('Error al cargar ');
+        })
+}
+
 module.exports = {
     PostLoginClient,
     GetAllClient,
@@ -199,5 +217,6 @@ module.exports = {
     GetClient,
     GetCuentaBanco,
     PostNewCuentaBanco,
-    GetDeleteCuentaBanco
+    GetDeleteCuentaBanco,
+    PostDepositoCuentaBanco
 }

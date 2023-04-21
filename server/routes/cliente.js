@@ -9,7 +9,8 @@ const {
     GetCuentaBanco,
     PostNewCuentaBanco,
     GetDeleteCuentaBanco,
-    PostLoginClient
+    PostLoginClient,
+    PostDepositoCuentaBanco
 } = require('../controllers/Cliente');
 const { cedulaExist, isClientValid,clientExist } = require('../middlewares/validation');
 
@@ -79,5 +80,13 @@ router.delete('/cuentabanco/delete/', [
     check('idCliente', 'No es un cliente existente').custom(isClientValid),
     validarCampos
 ], GetDeleteCuentaBanco())
+
+//DEPOSITAR A LA CUENTA DEL BANCO DEL CLIENTE//
+router.post('/cuentabanco/deposito/', [
+    //VERIFICAR QUE LA CUENTA EXISTE//
+    check('idCuenta', 'Error en la idCuenta').notEmpty(),
+    check('monto', 'Error en la monto').notEmpty(),
+    validarCampos
+], PostDepositoCuentaBanco())
 
 module.exports = router
