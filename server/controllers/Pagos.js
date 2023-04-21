@@ -4,7 +4,7 @@ const { CuentaBanco } = require("../models/Cliente");
 const { Pagos } = require("../models/Pagos");
 const { CuotaPrestamo } = require("../models/Prestamo")
 
-const crearPago = async ({ fechaRealizado, codigoComprobante, idCuenta, idCuota, idCliente, idPrestamo, tipo, res }) => {
+const crearPago = async ({ fechaRealizado, codigoComprobante, idCuenta, idCuota, idCliente, idPrestamo, tipo, res, cuota }) => {
     //crear pago y actualizar//
     
     await CuotaPrestamo.update(
@@ -16,12 +16,18 @@ const crearPago = async ({ fechaRealizado, codigoComprobante, idCuenta, idCuota,
         {
             where: { idCuota, idPrestamo, fechaRealizado: null }
         }
-    ).then((cuota) => {
-        if (cuota[0] !== 0) {
+    ).then(async (updateCuota) => {
+        if (updateCuota[0] !== 0) {
             res.json("CUOTA PAGADA")
-             Pagos.create({ fechaRealizado, codigoComprobante, idCuenta, idCuota, idCliente })
+
+          await CuentaBanco.update({
+                numero: sequelize.literal(`numero - ${cuota.monto}`)
+            }, { where: { idCuenta } })
+
+            Pagos.create({ fechaRealizado, codigoComprobante, idCuenta, idCuota, idCliente })
+
             updateFaltantePrestamo({ idCuota, idPrestamo })
-        } else {res.json('CUOTA PAGADA CON ANTERIORIDAD')}
+        } else {res.status(400).json('CUOTA PAGADA CON ANTERIORIDAD')}
     })
         .catch((err) => {
             console.log('Error al cargar:' + err);
@@ -42,12 +48,8 @@ const PostPagarCuota = () => async (req, res) => {
             await CuentaBanco.findByPk(idCuenta)
                 .then(async (cuenta) => {
                     if (cuenta.numero >= cuota.monto) {
-                        await CuentaBanco.update({
-                            numero: sequelize.literal(`numero - ${cuota.monto}`)
-                        }, { where: { idCuenta } }).then(() => {
-                            crearPago({ fechaRealizado, codigoComprobante, idCuenta, idCuota, idCliente, idPrestamo, tipo, res })
-                        })
-                    } else res.json('INSUFICIENTE DINERO')
+                       await crearPago({ fechaRealizado, codigoComprobante, idCuenta, idCuota, idCliente, idPrestamo, tipo, res,cuota })
+                    } else res.status(400).json('INSUFICIENTE DINERO')
                 }).catch((err) => {
                     console.log('Error al cargar:' + err);
                     res.status(400).json('Error al cargar ');
