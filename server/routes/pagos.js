@@ -1,8 +1,8 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validarCampos');
-const { isPrestamoValid } = require('../middlewares/validation');
-const { PostPagarCuota } = require('../controllers/Pagos');
+const { isPrestamoValid, isClientValid } = require('../middlewares/validation');
+const { PostPagarCuota, GetPagos } = require('../controllers/Pagos');
 //const { clienteExist } = require('../middlewares/validation');
 
 const router = Router();
@@ -11,7 +11,16 @@ const router = Router();
 router.post('/:idPrestamo',[
     check('idPrestamo', 'Error en el prestamo').notEmpty(),
     check('idPrestamo', 'Error en el prestamo').custom(isPrestamoValid),
+    check('idCliente', 'Error en la cliente').notEmpty(),
+    check('idCliente','Error en el cliente').custom(isClientValid),
     validarCampos
 ],PostPagarCuota())
+
+//RETORNAR HISTORIAL DE PAGO DE UN CLIENTE//
+router.get('/historial/:idCliente',[
+    check('idCliente', 'Error en la cliente').notEmpty(),
+    check('idCliente','Error en el cliente').custom(isClientValid),
+    validarCampos
+],GetPagos() )
 
 module.exports= router
